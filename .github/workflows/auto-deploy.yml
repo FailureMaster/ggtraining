@@ -30,10 +30,6 @@ jobs:
     #     TARGET: "/public_html/ggtraining"
 
     - name: Run Remote/Artisan Commands
-      # with:
-      #   host: ${{ secrets.VPS_HOST }}
-      #   username: ${{ secrets.VPS_USER }}
-      #   key: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           cd /public_html/ggtraining
           php artisan migrate --force
