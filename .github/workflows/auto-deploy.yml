@@ -30,7 +30,10 @@ jobs:
     #     TARGET: "/public_html/ggtraining"
 
     - name: Run Remote/Artisan Commands
-        run: |
-          cd /public_html/ggtraining
-          php artisan migrate --force
-          php artisan optimize
+      env:
+        HOST: ${{ secrets.VPS_HOST }}
+        USER: ${{ secrets.VPS_USER }}
+      run: |
+        cd /public_html/ggtraining
+        php artisan migrate --force
+        php artisan optimize
