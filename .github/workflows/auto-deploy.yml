@@ -20,19 +20,17 @@ jobs:
     - name: Install Composer Dependencies
       run: composer install --optimize-autoloader --no-dev --no-progress --no-interaction --prefer-dist
 
-    # - name: Synchronize Files To Server
-    #   uses: easingthemes/ssh-deploy@v2.1.5
-    #   env:
-    #     SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-    #     SOURCE: "."
-    #     REMOTE_HOST: ${{ secrets.VPS_HOST }}
-    #     REMOTE_USER: ${{ secrets.VPS_USER }}
-    #     TARGET: "/public_html/ggtraining"
+    - name: Synchronize Files To Server
+      uses: easingthemes/ssh-deploy@v2.1.5
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        SOURCE: "."
+        REMOTE_HOST: ${{ secrets.VPS_HOST }}
+        REMOTE_USER: ${{ secrets.VPS_USER }}
+        TARGET: "/public_html/ggtraining"
 
     - name: Run Remote/Artisan Commands
-      env:
-        HOST: ${{ secrets.VPS_HOST }}
-        USER: ${{ secrets.VPS_USER }}
+      
       run: |
         cd /public_html/ggtraining
         php artisan migrate --force
